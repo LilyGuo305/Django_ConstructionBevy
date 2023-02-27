@@ -1,0 +1,54 @@
+{% extends 'landing/base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 p-5">
+      {% if thread.receiver == request.user %}
+      <h1>Messages with <strong>{{thread.user}}</strong></h1>
+      {% else %}
+      <h1>Messages with <strong>{{thread.receiver}}</strong></h1>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if message_list.all.count == 0 %}
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-5 col-sm-12">
+      <p class="empty-text">No Messages, please send to start.</p>
+    </div>
+  </div>
+  {% endif %}
+
+  {% for message in message_list %}
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-5 col-sm-12 border-bottom">
+      {% if message.sender_user == request.user %}
+        <div class="sent-message my-3">
+          <p>{{ message.body }}</p>
+          <p><strong> - {{ message.sender_user }}</strong> {{ message.date }}</p>
+        </div>
+      {% elif message.receiver_user == request.user %}
+      <div class="received-message my-3">
+        <p>{{ message.body }}</p>
+        <p><strong> - {{ message.sender_user }}</strong> {{ message.date }}</p>
+      </div>
+  {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="row justify-content-center mt-3 mb-5">
+    <div class="col-md-5 col-sm-12">
+      <form method="POST" action="{% url 'create-message' thread.pk %}" >
+        {% csrf_token %}
+        {{ form }}
+        <div class="gap-2 mt-3">
+          <button class="btn btn-success mt-3">Send Message</button>
+          <a class="btn btn-light mt-3" href="{% url 'inbox' %}">Back to Inbox</a>
+          <a class="btn btn-danger mt-3" href="{% url 'delete-inbox' thread.pk %}">Delete</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends 'landing/base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 p-5">
+      <h1>Find a Recipient</h1>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-3 mb-5">
+    <div class="col-md-5 col-sm-12">
+      <form method="POST">
+          {% csrf_token %}
+          <p>Search a user by username:</p>
+          {% if messages %}
+			{% for message in messages %}
+				{{message}}
+			{% endfor %}
+          {% endif %}
+          {{form}}
+          <div class="gap-2">
+              <button class="btn btn-success mt-3" type="submit">Continue</button>
+          </div>
+          <a href="{% url 'inbox' %}" class="btn btn-light mt-3">Back to Inbox</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

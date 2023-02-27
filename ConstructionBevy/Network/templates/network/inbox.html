@@ -1,0 +1,45 @@
+{% extends 'landing/base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 p-5">
+      <h1>My Inbox</h1>
+      <p>Please find a new recipient or choose existing recipient</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 p-5">
+      <h3>New Recipient</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 p-5 border-bottom">
+      <form method="GET" action="{% url 'create-thread' %}">
+        <button class="btn btn-success" type="submit">Find a New Recipient</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 p-5">
+      <h3>Existing Recipient</h3>
+    </div>
+  </div>
+
+  {% for thread in threads.all %}
+  <div class="">
+    <div class="col-md-12 p-5">
+      {% if requestUser == thread.user %}
+      <h5>{{thread.receiver}}</h5>
+      {% else %}
+      <h5>{{thread.user}}</h5>
+      {% endif %}
+    <a class="btn btn-success" href="{% url 'thread' thread.pk %}">Send Message</a>
+    <a class="btn btn-danger" href="{% url 'delete-inbox' thread.pk %}">Delete</a>
+      </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
