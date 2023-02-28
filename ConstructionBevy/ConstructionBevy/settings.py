@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'allauth', # allauth
     'allauth.account', # allauth
     'allauth.socialaccount', # allauth
-    'crispy_forms',
+    'crispy_forms', # crispy forms
 ]
 
 SITE_ID = 1 # allauth
@@ -140,8 +140,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# allauth
 LOGIN_REDIRECT_URL = 'post-list'
 ACCOUNT_EMAIL_REQUIRED = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # test email feedback

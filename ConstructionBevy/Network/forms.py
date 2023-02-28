@@ -32,6 +32,6 @@ class MessageForm(forms.Form):
         label='',
         widget=forms.Textarea(attrs={
             'rows' : 3,
-            'placeholder' : 'Type here'
+            'placeholder' : 'Type new message here'
         })
     )

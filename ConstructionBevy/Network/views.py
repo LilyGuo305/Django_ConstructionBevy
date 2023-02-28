@@ -93,9 +93,9 @@ class ThreadView(View):
         thread = ThreadModel.objects.get(pk=pk)
         message_list = MessageModel.objects.filter(thread__pk__contains=pk)
         context = {
-            'thread' : thread,
-            'form' : form,
-            'message_list' : message_list
+            'thread': thread,
+            'form': form,
+            'message_list': message_list
         }
 
         return render(request, 'network/thread.html', context)
@@ -122,4 +122,13 @@ class DeleteThread(DeleteView):
     model = ThreadModel
     template_name = 'network/thread_delete.html'
     success_url = reverse_lazy('inbox')
+
+class DeleteMessage(DeleteView):
+    model = MessageModel
+    template_name = 'network/message_delete.html'
+
+    def get_success_url(self):
+        pk = self.kwargs['inbox_pk']
+        return reverse_lazy('thread', kwargs={'pk': pk})
+
 
