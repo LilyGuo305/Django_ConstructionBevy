@@ -28,10 +28,18 @@ class ThreadForm(forms.Form):
 
 class MessageForm(forms.Form):
 
+    title = forms.CharField(
+        label='',
+        widget=forms.Textarea(attrs={
+            'rows': 1,
+            'placeholder': 'Type title here'
+        })
+    )
+
     message = forms.CharField(
         label='',
         widget=forms.Textarea(attrs={
             'rows' : 3,
-            'placeholder' : 'Type new message here'
+            'placeholder' : 'Type message here'
         })
     )

@@ -112,6 +112,7 @@ class CreateMessage(View):
             thread=thread,
             sender_user=request.user,
             receiver_user=receiver,
+            title=request.POST.get('title'),
             body=request.POST.get('message'),
         )
 
