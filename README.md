@@ -1,3 +1,7 @@
+# Django_ConstructionBevy 
+
+A coding test demo project. Created by Junyi Guo.
+
 ## Prerequisite
 
 In order to successfully build the project, the following packages are required before building the django server:
